@@ -6,56 +6,58 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long id;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "car_id")
+    private Car car;
 
-   @Column(name = "name")
-   private String firstName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-   @Column(name = "last_name")
-   private String lastName;
+    @Column(name = "name", nullable = false)
+    private String firstName;
 
-   @Column(name = "email")
-   private String email;
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
 
-   public User() {}
-   
-   public User(String firstName, String lastName, String email) {
-      this.firstName = firstName;
-      this.lastName = lastName;
-      this.email = email;
-   }
+    @Column(name = "email", nullable = false)
+    private String email;
 
-   public Long getId() {
-      return id;
-   }
+    public User() {
+    }
 
-   public void setId(Long id) {
-      this.id = id;
-   }
+    public User(String firstName, String lastName, String email, Car car) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.car = car;
+    }
 
-   public String getFirstName() {
-      return firstName;
-   }
+    public Long getId() {
+        return id;
+    }
 
-   public void setFirstName(String firstName) {
-      this.firstName = firstName;
-   }
+    public String getFirstName() {
+        return firstName;
+    }
 
-   public String getLastName() {
-      return lastName;
-   }
+    public String getLastName() {
+        return lastName;
+    }
 
-   public void setLastName(String lastName) {
-      this.lastName = lastName;
-   }
+    public String getEmail() {
+        return email;
+    }
 
-   public String getEmail() {
-      return email;
-   }
-
-   public void setEmail(String email) {
-      this.email = email;
-   }
+    @Override
+    public String toString() {
+        return "User{" +
+                "car=" + car +
+                ", id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }
