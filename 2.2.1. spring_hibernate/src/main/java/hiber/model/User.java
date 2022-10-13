@@ -6,8 +6,8 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "car_id")
+    @OneToOne()
+    @MapsId()
     private Car car;
 
     @Id
